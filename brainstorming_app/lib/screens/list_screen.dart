@@ -9,12 +9,12 @@ class ListScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Brainstorming App'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, '/create'),
-          child: Text('Create New'),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, '/create'),
+        tooltip: 'Create Idea',
+        child: const Icon(Icons.add),
       ),
+      body: Container(),
     );
   }
 }
