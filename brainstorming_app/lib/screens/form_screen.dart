@@ -16,8 +16,8 @@ class _FormScreenState extends State<FormScreen> {
       appBar: AppBar(
         title: Text('Create Idea'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
+      body: SafeArea(
+        minimum: EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
@@ -36,16 +36,13 @@ class _FormScreenState extends State<FormScreen> {
                   return null;
                 },
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      Navigator.pop(context);
-                    }
-                  },
-                  child: Text('Create'),
-                ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text('Create'),
               ),
             ],
           ),
