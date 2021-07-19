@@ -17,11 +17,11 @@ class ListScreen extends StatelessWidget {
           child: const Icon(Icons.add),
         ),
         body: Container(
-          padding: EdgeInsets.all(16),
           child: GridView.count(
             crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
+            padding: EdgeInsets.all(16),
             children: List.generate(10, (index) {
               return IdeaCard(text: 'Sample Idea');
             }),
