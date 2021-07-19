@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './screens/list_screen.dart';
-import './screens/form_screen.dart';
+import 'package:brainstorming_app/screens/list_screen.dart';
+import 'package:brainstorming_app/screens/form_screen.dart';
 
 void main() => runApp(BrainstormingApp());
 

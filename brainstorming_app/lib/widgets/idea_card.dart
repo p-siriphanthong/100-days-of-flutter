@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/material.dart';
 
 class IdeaCard extends StatelessWidget {
   static List<MaterialColor> colors = [

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/text_field.dart' as brainstorming;
+import 'package:brainstorming_app/widgets/text_field.dart' as brainstorming;
 
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);

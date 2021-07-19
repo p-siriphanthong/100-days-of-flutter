@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/idea_card.dart';
+import 'package:brainstorming_app/widgets/idea_card.dart' as brainstorming;
 
 class ListScreen extends StatelessWidget {
   const ListScreen({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class ListScreen extends StatelessWidget {
             mainAxisSpacing: 16,
             padding: EdgeInsets.all(16),
             children: List.generate(10, (index) {
-              return IdeaCard(text: 'Sample Idea');
+              return brainstorming.IdeaCard(text: 'Sample Idea');
             }),
           ),
         ));
