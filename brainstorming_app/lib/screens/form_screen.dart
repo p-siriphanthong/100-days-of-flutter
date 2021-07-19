@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/text_field.dart' as brainstorming;
+
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);
 
@@ -24,11 +26,9 @@ class _FormScreenState extends State<FormScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              TextFormField(
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText: 'Your Idea',
-                ),
+              brainstorming.TextField(
+                hintText: 'Your Idea',
+                isTextArea: true,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
                     return 'Please fill your idea';
