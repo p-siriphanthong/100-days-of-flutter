@@ -13,3 +13,7 @@ This repository contains all the source code which I did while learning Flutter.
 - Create routes for list screen and form screen
 - Add `floatingActionButton` in list screen for navigate to form screen
 - Create `IdeaCard` widget
+
+**Day 2**
+
+- Create form UI
