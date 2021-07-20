@@ -1,5 +1,8 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
+
+import 'package:brainstorming_app/models/idea.dart';
 
 class IdeaCard extends StatelessWidget {
   static List<MaterialColor> colors = [
@@ -9,9 +12,9 @@ class IdeaCard extends StatelessWidget {
     Colors.lightGreen,
     Colors.cyan,
   ];
-  final String text;
+  final Idea idea;
 
-  const IdeaCard({Key? key, required this.text}) : super(key: key);
+  const IdeaCard({Key? key, required this.idea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,10 @@ class IdeaCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text(this.text),
+        child: Text(
+          this.idea.text,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

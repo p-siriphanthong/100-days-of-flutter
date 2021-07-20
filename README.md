@@ -23,3 +23,4 @@ This repository contains all the source code which I did while learning Flutter.
 **Day 3**
 
 - Create `json-server` for faking REST API
+- Fetch ideas from `json-server` to show in list screen
