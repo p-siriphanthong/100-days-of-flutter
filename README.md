@@ -19,3 +19,7 @@ This repository contains all the source code which I did while learning Flutter.
 - Create form UI
 - Using `SafeArea` in form screen
 - Create `TextField` widget for custom `TextFormField`
+
+**Day 3**
+
+- Create `json-server` for faking REST API

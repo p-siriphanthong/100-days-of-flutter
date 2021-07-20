@@ -1,0 +1,10 @@
+{
+  "name": "json-server",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^0.16.3"
+  }
+}
