@@ -4,12 +4,14 @@ class TextField extends StatelessWidget {
   final String hintText;
   final bool? isTextArea;
   final FormFieldValidator<String>? validator;
+  final FormFieldSetter<String>? onSaved;
 
   const TextField({
     Key? key,
     required this.hintText,
     this.isTextArea,
     this.validator,
+    this.onSaved,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class TextField extends StatelessWidget {
         filled: true,
       ),
       validator: validator,
+      onSaved: onSaved,
     );
   }
 }

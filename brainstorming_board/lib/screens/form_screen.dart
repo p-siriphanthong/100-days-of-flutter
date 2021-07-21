@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:brainstorming_board/widgets/text_field.dart' as brainstorming;
+import 'package:brainstorming_board/models/idea.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key}) : super(key: key);
+  final Future<Idea> Function(String text) onCreateIdea;
+
+  const FormScreen({Key? key, required this.onCreateIdea}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();
@@ -11,6 +14,7 @@ class FormScreen extends StatefulWidget {
 
 class _FormScreenState extends State<FormScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool _isSubmitting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +39,25 @@ class _FormScreenState extends State<FormScreen> {
                   }
                   return null;
                 },
+                onSaved: (String? value) {
+                  setState(() {
+                    _isSubmitting = true;
+                  });
+
+                  widget
+                      .onCreateIdea(value!)
+                      .whenComplete(() => Navigator.pop(context));
+                },
               ),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: Text('Create'),
+                child: Text(_isSubmitting ? 'Creating' : 'Create'),
+                onPressed: _isSubmitting
+                    ? null
+                    : () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                        }
+                      },
               ),
             ],
           ),

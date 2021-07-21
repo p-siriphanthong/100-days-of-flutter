@@ -15,12 +15,27 @@ class BrainstormingBoard extends StatefulWidget {
 }
 
 class _BrainstormingBoardState extends State<BrainstormingBoard> {
-  late Future<List<Idea>> ideas;
+  late Future<List<Idea>> _ideas;
 
   @override
   void initState() {
     super.initState();
-    ideas = getIdeas();
+    _ideas = getIdeas();
+  }
+
+  Future<Idea> onCreateIdea(String text) {
+    return createIdea(text).then((Idea newIdea) {
+      _ideas.then((ideas) {
+        List<Idea> newIdeas = ideas;
+        newIdeas.add(newIdea);
+
+        setState(() {
+          _ideas = Future<List<Idea>>.value(newIdeas);
+        });
+      });
+
+      return newIdea;
+    });
   }
 
   @override
@@ -29,8 +44,8 @@ class _BrainstormingBoardState extends State<BrainstormingBoard> {
       title: 'Brainstorming Board',
       initialRoute: '/',
       routes: {
-        '/': (context) => ListScreen(ideas: ideas),
-        '/create': (context) => FormScreen(),
+        '/': (context) => ListScreen(ideas: _ideas),
+        '/create': (context) => FormScreen(onCreateIdea: onCreateIdea),
       },
     );
   }

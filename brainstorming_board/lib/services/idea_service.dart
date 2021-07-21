@@ -27,3 +27,27 @@ Future<List<Idea>> getIdeas() async {
 
   return ideas;
 }
+
+Future<Idea> createIdea(String text) async {
+  late http.Response? response;
+
+  try {
+    response = await http.post(
+      Uri.parse('$API_URL/ideas'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'text': text,
+      }),
+    );
+  } catch (err) {
+    return Future.error('Cannot connect to server');
+  }
+
+  if (response.statusCode != 201) {
+    return Future.error('Error: ${response.statusCode}');
+  }
+
+  return Idea.fromJson(jsonDecode(response.body));
+}
