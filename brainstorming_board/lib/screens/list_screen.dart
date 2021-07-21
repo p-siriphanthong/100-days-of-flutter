@@ -22,9 +22,9 @@ class ListScreen extends StatelessWidget {
       body: FutureBuilder<List<Idea>>(
           future: ideas,
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return Center(child: Text('Loading...'));
             if (snapshot.hasError)
               return Center(child: Text('${snapshot.error}'));
+            if (!snapshot.hasData) return Center(child: Text('Loading...'));
 
             List<Idea> data = snapshot.data!;
 

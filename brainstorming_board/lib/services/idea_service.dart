@@ -6,9 +6,17 @@ import 'package:brainstorming_board/config.dart';
 import 'package:brainstorming_board/models/idea.dart';
 
 Future<List<Idea>> getIdeas() async {
-  final response = await http.get(Uri.parse('$API_URL/ideas'));
+  late http.Response? response;
 
-  if (response.statusCode != 200) throw Exception('Failed to load ideas');
+  try {
+    response = await http.get(Uri.parse('$API_URL/ideas'));
+  } catch (err) {
+    return Future.error('Cannot connect to server');
+  }
+
+  if (response.statusCode != 200) {
+    return Future.error('Error: ${response.statusCode}');
+  }
 
   List<dynamic> body = jsonDecode(response.body);
   List<Idea> ideas = [];
