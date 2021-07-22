@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TextField extends StatelessWidget {
   final String hintText;
+  final int? maxLength;
   final bool? isTextArea;
   final FormFieldValidator<String>? validator;
   final FormFieldSetter<String>? onSaved;
@@ -9,6 +10,7 @@ class TextField extends StatelessWidget {
   const TextField({
     Key? key,
     required this.hintText,
+    this.maxLength,
     this.isTextArea,
     this.validator,
     this.onSaved,
@@ -17,6 +19,7 @@ class TextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: maxLength,
       maxLines: isTextArea == true ? 4 : 1,
       decoration: InputDecoration(
         hintText: hintText,

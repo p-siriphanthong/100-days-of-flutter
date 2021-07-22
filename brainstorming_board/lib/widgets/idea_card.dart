@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:brainstorming_board/models/idea.dart';
 
@@ -25,8 +26,9 @@ class IdeaCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Center(
-        child: Text(
+        child: AutoSizeText(
           this.idea.text,
+          style: TextStyle(fontSize: 20),
           textAlign: TextAlign.center,
         ),
       ),

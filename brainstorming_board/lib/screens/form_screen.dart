@@ -32,6 +32,7 @@ class _FormScreenState extends State<FormScreen> {
             children: <Widget>[
               brainstorming.TextField(
                 hintText: 'Your Idea',
+                maxLength: 200,
                 isTextArea: true,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {

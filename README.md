@@ -28,3 +28,7 @@ This repository contains all the source code which I did while learning Flutter.
 **Day 4**
 
 - Binding form screen to create new idea
+
+**Day 5**
+
+- Using `AutoSizeText` for dynamic font size in `IdeaCard`
