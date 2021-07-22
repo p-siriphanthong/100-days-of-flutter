@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:brainstorming_board/widgets/idea_card.dart';
 import 'package:brainstorming_board/models/idea.dart';
+import 'package:brainstorming_board/utils/device.dart';
 
 class ListScreen extends StatelessWidget {
   final Future<List<Idea>> ideas;
@@ -29,7 +30,7 @@ class ListScreen extends StatelessWidget {
             List<Idea> data = snapshot.data!;
 
             return GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount: isMobile(context) ? 2 : 4,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
               padding: EdgeInsets.all(16),
