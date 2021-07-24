@@ -5,14 +5,16 @@ import 'package:brainstorming_board/models/idea.dart';
 import 'package:brainstorming_board/utils/device.dart';
 
 class ListScreen extends StatelessWidget {
-  final Future<List<Idea>> ideas;
   final bool isDarkTheme;
+  final Future<List<Idea>> ideas;
+  final Future<void> Function() refreshIdeas;
   final void Function() toggleTheme;
 
   const ListScreen({
     Key? key,
     required this.ideas,
     required this.isDarkTheme,
+    required this.refreshIdeas,
     required this.toggleTheme,
   }) : super(key: key);
 
@@ -35,25 +37,28 @@ class ListScreen extends StatelessWidget {
         tooltip: 'Create Idea',
         child: const Icon(Icons.add),
       ),
-      body: FutureBuilder<List<Idea>>(
-          future: ideas,
-          builder: (context, snapshot) {
-            if (snapshot.hasError)
-              return Center(child: Text('${snapshot.error}'));
-            if (!snapshot.hasData) return Center(child: Text('Loading...'));
+      body: RefreshIndicator(
+        onRefresh: refreshIdeas,
+        child: FutureBuilder<List<Idea>>(
+            future: ideas,
+            builder: (context, snapshot) {
+              if (snapshot.hasError)
+                return Center(child: Text('${snapshot.error}'));
+              if (!snapshot.hasData) return Center(child: Text('Loading...'));
 
-            List<Idea> data = snapshot.data!;
+              List<Idea> data = snapshot.data!;
 
-            return GridView.count(
-              crossAxisCount: isMobile(context) ? 2 : 4,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              padding: EdgeInsets.all(16),
-              children: List.generate(data.length, (index) {
-                return IdeaCard(idea: data.elementAt(index));
-              }),
-            );
-          }),
+              return GridView.count(
+                crossAxisCount: isMobile(context) ? 2 : 4,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                padding: EdgeInsets.all(16),
+                children: List.generate(data.length, (index) {
+                  return IdeaCard(idea: data.elementAt(index));
+                }),
+              );
+            }),
+      ),
     );
   }
 }

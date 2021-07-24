@@ -24,6 +24,13 @@ class _BrainstormingBoardState extends State<BrainstormingBoard> {
     _ideas = getIdeas();
   }
 
+  Future<void> _refreshIdeas() async {
+    List<Idea> ideas = await getIdeas();
+    setState(() {
+      _ideas = Future<List<Idea>>.value(ideas);
+    });
+  }
+
   void _toggleTheme() {
     setState(() {
       _isDarkTheme = !_isDarkTheme;
@@ -56,6 +63,7 @@ class _BrainstormingBoardState extends State<BrainstormingBoard> {
           return ListScreen(
             ideas: _ideas,
             isDarkTheme: _isDarkTheme,
+            refreshIdeas: _refreshIdeas,
             toggleTheme: _toggleTheme,
           );
         },
