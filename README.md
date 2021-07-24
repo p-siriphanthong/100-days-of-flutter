@@ -34,3 +34,7 @@ This repository contains all the source code which I did while learning Flutter.
 - Using `AutoSizeText` for dynamic font size in `IdeaCard`
 - Create device utilities for check device type (mobile, tablet, desktop)
 - Responsive list screen
+
+**Day 6**
+
+- Implementing dark/light mode themes

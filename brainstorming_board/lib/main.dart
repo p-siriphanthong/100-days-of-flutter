@@ -16,11 +16,18 @@ class BrainstormingBoard extends StatefulWidget {
 
 class _BrainstormingBoardState extends State<BrainstormingBoard> {
   late Future<List<Idea>> _ideas;
+  bool _isDarkTheme = false;
 
   @override
   void initState() {
     super.initState();
     _ideas = getIdeas();
+  }
+
+  void _toggleTheme() {
+    setState(() {
+      _isDarkTheme = !_isDarkTheme;
+    });
   }
 
   Future<Idea> onCreateIdea(String text) {
@@ -42,9 +49,16 @@ class _BrainstormingBoardState extends State<BrainstormingBoard> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Brainstorming Board',
+      theme: _isDarkTheme ? ThemeData.dark() : ThemeData.light(),
       initialRoute: '/',
       routes: {
-        '/': (context) => ListScreen(ideas: _ideas),
+        '/': (context) {
+          return ListScreen(
+            ideas: _ideas,
+            isDarkTheme: _isDarkTheme,
+            toggleTheme: _toggleTheme,
+          );
+        },
         '/create': (context) => FormScreen(onCreateIdea: onCreateIdea),
       },
     );

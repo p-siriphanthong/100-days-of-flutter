@@ -28,7 +28,7 @@ class IdeaCard extends StatelessWidget {
       child: Center(
         child: AutoSizeText(
           this.idea.text,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(color: Colors.black, fontSize: 20),
           textAlign: TextAlign.center,
         ),
       ),
