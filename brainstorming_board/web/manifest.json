@@ -1,6 +1,6 @@
 {
     "name": "brainstorming_board",
-    "short_name": "brainstorming_board",
+    "short_name": "Brainstorming Board",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
