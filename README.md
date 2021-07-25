@@ -44,3 +44,4 @@ This repository contains all the source code which I did while learning Flutter.
 **Day 7**
 
 - Fix the Android emulator cannot access API
+- Create splash screen using `flutter_native_splash` package
