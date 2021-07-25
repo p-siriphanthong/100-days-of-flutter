@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:brainstorming_board/widgets/button.dart' as brainstorming;
 import 'package:brainstorming_board/widgets/text_field.dart' as brainstorming;
 import 'package:brainstorming_board/models/idea.dart';
 
@@ -50,7 +52,7 @@ class _FormScreenState extends State<FormScreen> {
                       .whenComplete(() => Navigator.pop(context));
                 },
               ),
-              ElevatedButton(
+              brainstorming.Button(
                 child: Text(_isSubmitting ? 'Creating' : 'Create'),
                 onPressed: _isSubmitting
                     ? null

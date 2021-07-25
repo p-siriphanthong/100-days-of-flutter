@@ -45,3 +45,4 @@ This repository contains all the source code which I did while learning Flutter.
 
 - Fix the Android emulator cannot access API
 - Create splash screen using `flutter_native_splash` package
+- Using `CupertinoButton` for iOS and `ElevatedButton` for Android
