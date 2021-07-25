@@ -9,7 +9,7 @@ Future<List<Idea>> getIdeas() async {
   late http.Response? response;
 
   try {
-    response = await http.get(Uri.parse('$API_URL/ideas'));
+    response = await http.get(Uri.parse('$apiUrl/ideas'));
   } catch (err) {
     return Future.error('Cannot connect to server');
   }
@@ -33,7 +33,7 @@ Future<Idea> createIdea(String text) async {
 
   try {
     response = await http.post(
-      Uri.parse('$API_URL/ideas'),
+      Uri.parse('$apiUrl/ideas'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

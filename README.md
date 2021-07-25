@@ -40,3 +40,7 @@ This repository contains all the source code which I did while learning Flutter.
 - Implementing dark/light mode themes
 - Implementing pull-to-refresh
 - Change application name and icon
+
+**Day 7**
+
+- Fix the Android emulator cannot access API
