@@ -6,7 +6,11 @@ This repository contains all the source code which I did while learning Flutter.
 
 ## Code Log
 
-### Brainstorming Board
+### [Brainstorming Board](./brainstorming_board)
+
+Learn about the basics of Flutter
+
+![](./demo/brainstorming_board.gif)
 
 **Day 1**
 
