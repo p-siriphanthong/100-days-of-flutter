@@ -50,3 +50,11 @@ Learn about the basics of Flutter
 - Fix the Android emulator cannot access API
 - Create splash screen using `flutter_native_splash` package
 - Using `CupertinoButton` for iOS and `ElevatedButton` for Android
+
+### [Todo List](./todo_list)
+
+Learn about state management
+
+**Day 8**
+
+- Create todo list UI
