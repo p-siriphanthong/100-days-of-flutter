@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:todo_list/providers/todo_list_provider.dart';
 import 'package:todo_list/models/todo.dart';
 
 class FormScreenArguments {
@@ -10,15 +11,8 @@ class FormScreenArguments {
 
 class FormScreen extends StatefulWidget {
   final String? id;
-  final void Function(String text) createTodo;
-  final void Function(int id, {String text}) updateTodo;
 
-  const FormScreen({
-    Key? key,
-    this.id,
-    required this.createTodo,
-    required this.updateTodo,
-  }) : super(key: key);
+  const FormScreen({Key? key, this.id}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();
@@ -35,62 +29,64 @@ class _FormScreenState extends State<FormScreen> {
     Todo? todo = args.todo;
     bool _isEditing = todo != null;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(_isEditing ? 'Edit Todo' : 'Create Todo'),
-      ),
-      body: SafeArea(
-        minimum: EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              TextFormField(
-                initialValue: todo?.text ?? '',
-                decoration: InputDecoration(
-                  hintText: 'Your Todo',
-                ),
-                maxLength: 50,
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please fill your todo';
-                  }
-                  return null;
-                },
-                onSaved: (String? value) {
-                  setState(() {
-                    _isSubmitting = true;
-                  });
+    return TodoListCustomer(builder: (context, todoList, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(_isEditing ? 'Edit Todo' : 'Create Todo'),
+        ),
+        body: SafeArea(
+          minimum: EdgeInsets.all(16),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                TextFormField(
+                  initialValue: todo?.text ?? '',
+                  decoration: InputDecoration(
+                    hintText: 'Your Todo',
+                  ),
+                  maxLength: 50,
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please fill your todo';
+                    }
+                    return null;
+                  },
+                  onSaved: (String? value) {
+                    setState(() {
+                      _isSubmitting = true;
+                    });
 
-                  if (_isEditing) {
-                    widget.updateTodo(todo.id, text: value!);
-                  } else {
-                    widget.createTodo(value!);
-                  }
+                    if (_isEditing) {
+                      todoList.update(todo.id, text: value!);
+                    } else {
+                      todoList.create(value!);
+                    }
 
-                  Navigator.pop(context);
-                },
-              ),
-              ElevatedButton(
-                child: Text(
-                  _isSubmitting
-                      ? (_isEditing ? 'Updating' : 'Creating')
-                      : (_isEditing ? 'Update' : 'Create'),
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: _isSubmitting
-                    ? null
-                    : () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
-                        }
-                      },
-              ),
-            ],
+                ElevatedButton(
+                  child: Text(
+                    _isSubmitting
+                        ? (_isEditing ? 'Updating' : 'Creating')
+                        : (_isEditing ? 'Update' : 'Create'),
+                  ),
+                  onPressed: _isSubmitting
+                      ? null
+                      : () {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                          }
+                        },
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

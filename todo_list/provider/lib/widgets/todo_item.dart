@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import 'package:todo_list/providers/todo_list_provider.dart';
 import 'package:todo_list/screens/form_screen.dart';
 import 'package:todo_list/models/todo.dart';
 import 'package:todo_list/widgets/delete_dialog.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
-  final void Function(int id, {bool isDone}) updateTodo;
-  final void Function(int id) deleteTodo;
 
-  const TodoItem({
-    Key? key,
-    required this.todo,
-    required this.updateTodo,
-    required this.deleteTodo,
-  }) : super(key: key);
+  const TodoItem({Key? key, required this.todo}) : super(key: key);
 
   void navigateToEditScreen(BuildContext context) {
     Navigator.pushNamed(
@@ -25,7 +19,7 @@ class TodoItem extends StatelessWidget {
     );
   }
 
-  void _delete(BuildContext context) {
+  void _delete(BuildContext context, void Function(int id) deleteTodo) {
     showDialog(
       context: context,
       builder: (BuildContext context) => DeleteDialog(
@@ -43,10 +37,11 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      child: CheckboxListTile(
+    return TodoListCustomer(builder: (context, todoList, child) {
+      return Slidable(
+        actionPane: SlidableDrawerActionPane(),
+        actionExtentRatio: 0.25,
+        child: CheckboxListTile(
           title: Text(
             todo.text,
             style: todo.isDone
@@ -54,21 +49,25 @@ class TodoItem extends StatelessWidget {
                 : null,
           ),
           value: todo.isDone,
-          onChanged: (bool? value) => updateTodo(todo.id, isDone: value!)),
-      secondaryActions: <Widget>[
-        IconSlideAction(
-          caption: 'Edit',
-          color: Colors.blue,
-          icon: Icons.edit,
-          onTap: () => navigateToEditScreen(context),
+          onChanged: (bool? value) {
+            todoList.update(todo.id, isDone: value!);
+          },
         ),
-        IconSlideAction(
-          caption: 'Delete',
-          color: Colors.red,
-          icon: Icons.delete,
-          onTap: () => _delete(context),
-        ),
-      ],
-    );
+        secondaryActions: <Widget>[
+          IconSlideAction(
+            caption: 'Edit',
+            color: Colors.blue,
+            icon: Icons.edit,
+            onTap: () => navigateToEditScreen(context),
+          ),
+          IconSlideAction(
+            caption: 'Delete',
+            color: Colors.red,
+            icon: Icons.delete,
+            onTap: () => _delete(context, todoList.delete),
+          ),
+        ],
+      );
+    });
   }
 }

@@ -62,3 +62,4 @@ Learn about state management
 **Day 9**
 
 - Manage state of todo list by setState
+- Manage state of todo list by Provider
