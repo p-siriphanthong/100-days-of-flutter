@@ -6,8 +6,15 @@ import 'package:todo_list/widgets/todo_item.dart';
 
 class ListScreen extends StatelessWidget {
   final List<Todo> todoList;
+  final void Function(int id, {bool isDone}) updateTodo;
+  final void Function(int id) deleteTodo;
 
-  const ListScreen({Key? key, required this.todoList}) : super(key: key);
+  const ListScreen({
+    Key? key,
+    required this.todoList,
+    required this.updateTodo,
+    required this.deleteTodo,
+  }) : super(key: key);
 
   void navigateToCreateScreen(BuildContext context) {
     Navigator.pushNamed(
@@ -31,7 +38,11 @@ class ListScreen extends StatelessWidget {
         body: ListView.separated(
           itemCount: todoList.length,
           itemBuilder: (BuildContext context, int index) {
-            return TodoItem(todo: todoList[index]);
+            return TodoItem(
+              todo: todoList[index],
+              updateTodo: updateTodo,
+              deleteTodo: deleteTodo,
+            );
           },
           separatorBuilder: (BuildContext context, int index) {
             return Divider(height: 0);

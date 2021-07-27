@@ -58,3 +58,7 @@ Learn about state management
 **Day 8**
 
 - Create todo list UI
+
+**Day 9**
+
+- Manage state of todo list by setState

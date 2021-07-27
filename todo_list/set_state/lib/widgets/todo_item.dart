@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -9,10 +7,14 @@ import 'package:todo_list/widgets/delete_dialog.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
+  final void Function(int id, {bool isDone}) updateTodo;
+  final void Function(int id) deleteTodo;
 
   const TodoItem({
     Key? key,
     required this.todo,
+    required this.updateTodo,
+    required this.deleteTodo,
   }) : super(key: key);
 
   void navigateToEditScreen(BuildContext context) {
@@ -28,10 +30,13 @@ class TodoItem extends StatelessWidget {
       context: context,
       builder: (BuildContext context) => DeleteDialog(
         title: 'Do you want to delete the todo\n"${todo.text}"?',
-        onDelete: () =>
-            log(todo.id.toString(), name: 'Delete'), // TODO: binding
-        onCancel: () =>
-            Navigator.of(context, rootNavigator: true).pop('dialog'),
+        onDelete: () {
+          deleteTodo(todo.id);
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+        onCancel: () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
       ),
     );
   }
@@ -42,16 +47,14 @@ class TodoItem extends StatelessWidget {
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: CheckboxListTile(
-        title: Text(
-          todo.text,
-          style: todo.isDone
-              ? TextStyle(decoration: TextDecoration.lineThrough)
-              : null,
-        ),
-        value: todo.isDone,
-        onChanged: (bool? value) =>
-            log(value.toString(), name: 'isDone'), // TODO: binding
-      ),
+          title: Text(
+            todo.text,
+            style: todo.isDone
+                ? TextStyle(decoration: TextDecoration.lineThrough)
+                : null,
+          ),
+          value: todo.isDone,
+          onChanged: (bool? value) => updateTodo(todo.id, isDone: value!)),
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Edit',

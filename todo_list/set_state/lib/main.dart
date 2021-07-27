@@ -14,11 +14,41 @@ class TodoApp extends StatefulWidget {
 }
 
 class _TodoAppState extends State<TodoApp> {
-  List<Todo> todoList = [
-    // TODO: remove initial value
-    Todo(id: 1, text: 'Buy milk', isDone: false),
-    Todo(id: 2, text: 'Buy eggs', isDone: true),
-  ];
+  List<Todo> todoList = [];
+  int currentTodoId = 1;
+
+  void createTodo(String text) {
+    Todo newTodo = Todo(id: currentTodoId, text: text);
+    todoList.add(newTodo);
+
+    setState(() {
+      todoList = todoList;
+      currentTodoId++;
+    });
+  }
+
+  void updateTodo(int id, {String? text, bool? isDone}) {
+    todoList.forEach((element) {
+      if (element.id == id) {
+        if (text != null) element.text = text;
+        if (isDone != null) element.isDone = isDone;
+      }
+    });
+
+    setState(() {
+      todoList = todoList;
+    });
+  }
+
+  void deleteTodo(int id) {
+    todoList.removeWhere((element) {
+      return element.id == id;
+    });
+
+    setState(() {
+      todoList = todoList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +56,19 @@ class _TodoAppState extends State<TodoApp> {
       title: 'Todo List',
       initialRoute: '/',
       routes: {
-        '/': (context) => ListScreen(todoList: todoList),
-        '/form': (context) => FormScreen(),
+        '/': (context) {
+          return ListScreen(
+            todoList: todoList,
+            updateTodo: updateTodo,
+            deleteTodo: deleteTodo,
+          );
+        },
+        '/form': (context) {
+          return FormScreen(
+            createTodo: createTodo,
+            updateTodo: updateTodo,
+          );
+        }
       },
     );
   }
