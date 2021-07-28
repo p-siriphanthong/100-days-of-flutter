@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 import 'package:todo_list/screens/form_screen.dart';
 import 'package:todo_list/models/todo.dart';
 import 'package:todo_list/widgets/delete_dialog.dart';
+import 'package:todo_list/controllers/todo_list.dart';
 
 class TodoItem extends StatelessWidget {
+  final TodoListController todoList = Get.put(TodoListController());
   final Todo todo;
-  final void Function(int id, {bool isDone}) updateTodo;
-  final void Function(int id) deleteTodo;
 
-  const TodoItem({
-    Key? key,
-    required this.todo,
-    required this.updateTodo,
-    required this.deleteTodo,
-  }) : super(key: key);
+  TodoItem({Key? key, required this.todo}) : super(key: key);
 
   void navigateToEditScreen(BuildContext context) {
     Navigator.pushNamed(
@@ -31,7 +27,7 @@ class TodoItem extends StatelessWidget {
       builder: (BuildContext context) => DeleteDialog(
         title: 'Do you want to delete the todo\n"${todo.text}"?',
         onDelete: () {
-          deleteTodo(todo.id);
+          todoList.deleteItem(todo.id);
           Navigator.of(context, rootNavigator: true).pop('dialog');
         },
         onCancel: () {
@@ -54,7 +50,8 @@ class TodoItem extends StatelessWidget {
                 : null,
           ),
           value: todo.isDone,
-          onChanged: (bool? value) => updateTodo(todo.id, isDone: value!)),
+          onChanged: (bool? value) =>
+              todoList.updateItem(todo.id, isDone: value!)),
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Edit',

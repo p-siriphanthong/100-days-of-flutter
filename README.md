@@ -63,3 +63,7 @@ Learn about state management
 
 - Manage state of todo list by setState
 - Manage state of todo list by Provider
+
+**Day 10**
+
+- Manage state of todo list by GetX

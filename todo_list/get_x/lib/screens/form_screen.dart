@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:todo_list/models/todo.dart';
+import 'package:todo_list/controllers/todo_list.dart';
 
 class FormScreenArguments {
   final Todo? todo;
@@ -10,21 +12,15 @@ class FormScreenArguments {
 
 class FormScreen extends StatefulWidget {
   final String? id;
-  final void Function(String text) createTodo;
-  final void Function(int id, {String text}) updateTodo;
 
-  const FormScreen({
-    Key? key,
-    this.id,
-    required this.createTodo,
-    required this.updateTodo,
-  }) : super(key: key);
+  FormScreen({Key? key, this.id}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();
 }
 
 class _FormScreenState extends State<FormScreen> {
+  final TodoListController todoList = Get.put(TodoListController());
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isSubmitting = false;
 
@@ -65,9 +61,9 @@ class _FormScreenState extends State<FormScreen> {
                   });
 
                   if (_isEditing) {
-                    widget.updateTodo(todo.id, text: value!);
+                    todoList.updateItem(todo.id, text: value!);
                   } else {
-                    widget.createTodo(value!);
+                    todoList.createItem(value!);
                   }
 
                   Navigator.pop(context);
