@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:todo_list/models/todo.dart';
+import 'package:todo_list/bloc/todo_list_bloc.dart';
 
 class FormScreenArguments {
   final Todo? todo;
@@ -10,15 +12,8 @@ class FormScreenArguments {
 
 class FormScreen extends StatefulWidget {
   final String? id;
-  final void Function(String text) createTodo;
-  final void Function(int id, {String text}) updateTodo;
 
-  const FormScreen({
-    Key? key,
-    this.id,
-    required this.createTodo,
-    required this.updateTodo,
-  }) : super(key: key);
+  const FormScreen({Key? key, this.id}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();
@@ -34,6 +29,7 @@ class _FormScreenState extends State<FormScreen> {
         ModalRoute.of(context)!.settings.arguments as FormScreenArguments;
     Todo? todo = args.todo;
     bool _isEditing = todo != null;
+    TodoListBloc _todoListBloc = BlocProvider.of<TodoListBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,9 +61,11 @@ class _FormScreenState extends State<FormScreen> {
                   });
 
                   if (_isEditing) {
-                    widget.updateTodo(todo.id, text: value!);
+                    _todoListBloc.add(
+                      TodoListUpdateItemEvent(id: todo.id, text: value!),
+                    );
                   } else {
-                    widget.createTodo(value!);
+                    _todoListBloc.add(TodoListAddItemEvent(text: value!));
                   }
 
                   Navigator.pop(context);

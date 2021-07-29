@@ -67,3 +67,7 @@ Learn about state management
 **Day 10**
 
 - Manage state of todo list by GetX
+
+**Day 11**
+
+- Manage state of todo list by Bloc

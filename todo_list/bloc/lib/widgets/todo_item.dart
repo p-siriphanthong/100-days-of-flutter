@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:todo_list/screens/form_screen.dart';
 import 'package:todo_list/models/todo.dart';
 import 'package:todo_list/widgets/delete_dialog.dart';
+import 'package:todo_list/bloc/todo_list_bloc.dart';
 
 class TodoItem extends StatelessWidget {
   final Todo todo;
-  final void Function(int id, {bool isDone}) updateTodo;
-  final void Function(int id) deleteTodo;
 
-  const TodoItem({
-    Key? key,
-    required this.todo,
-    required this.updateTodo,
-    required this.deleteTodo,
-  }) : super(key: key);
+  const TodoItem({Key? key, required this.todo}) : super(key: key);
 
   void navigateToEditScreen(BuildContext context) {
     Navigator.pushNamed(
@@ -25,13 +20,13 @@ class TodoItem extends StatelessWidget {
     );
   }
 
-  void _delete(BuildContext context) {
+  void _delete(BuildContext context, void Function() onDelete) {
     showDialog(
       context: context,
       builder: (BuildContext context) => DeleteDialog(
         title: 'Do you want to delete the todo\n"${todo.text}"?',
         onDelete: () {
-          deleteTodo(todo.id);
+          onDelete();
           Navigator.of(context, rootNavigator: true).pop('dialog');
         },
         onCancel: () {
@@ -43,18 +38,23 @@ class TodoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TodoListBloc _todoListBloc = BlocProvider.of<TodoListBloc>(context);
+
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: CheckboxListTile(
-          title: Text(
-            todo.text,
-            style: todo.isDone
-                ? TextStyle(decoration: TextDecoration.lineThrough)
-                : null,
-          ),
-          value: todo.isDone,
-          onChanged: (bool? value) => updateTodo(todo.id, isDone: value!)),
+        title: Text(
+          todo.text,
+          style: todo.isDone
+              ? TextStyle(decoration: TextDecoration.lineThrough)
+              : null,
+        ),
+        value: todo.isDone,
+        onChanged: (bool? value) => _todoListBloc.add(
+          TodoListUpdateItemEvent(id: todo.id, isDone: value!),
+        ),
+      ),
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Edit',
@@ -66,7 +66,10 @@ class TodoItem extends StatelessWidget {
           caption: 'Delete',
           color: Colors.red,
           icon: Icons.delete,
-          onTap: () => _delete(context),
+          onTap: () => _delete(
+            context,
+            () => _todoListBloc.add(TodoListDeleteItemEvent(id: todo.id)),
+          ),
         ),
       ],
     );
