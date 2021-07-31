@@ -11,9 +11,7 @@ class FormScreenArguments {
 }
 
 class FormScreen extends StatefulWidget {
-  final String? id;
-
-  const FormScreen({Key? key, this.id}) : super(key: key);
+  const FormScreen({Key? key}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();

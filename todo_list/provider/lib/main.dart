@@ -6,14 +6,9 @@ import 'package:todo_list/screens/form_screen.dart';
 
 void main() => runApp(TodoApp());
 
-class TodoApp extends StatefulWidget {
-  TodoApp({Key? key}) : super(key: key);
+class TodoApp extends StatelessWidget {
+  const TodoApp({Key? key}) : super(key: key);
 
-  @override
-  _TodoAppState createState() => _TodoAppState();
-}
-
-class _TodoAppState extends State<TodoApp> {
   @override
   Widget build(BuildContext context) {
     return TodoListProvider(

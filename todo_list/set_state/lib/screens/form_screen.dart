@@ -9,13 +9,11 @@ class FormScreenArguments {
 }
 
 class FormScreen extends StatefulWidget {
-  final String? id;
   final void Function(String text) createTodo;
   final void Function(int id, {String text}) updateTodo;
 
   const FormScreen({
     Key? key,
-    this.id,
     required this.createTodo,
     required this.updateTodo,
   }) : super(key: key);
