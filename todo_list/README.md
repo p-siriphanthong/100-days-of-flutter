@@ -8,3 +8,4 @@ Project for learning about Flutter state management
 - [Provider](./provider)
 - [GetX](./get_x)
 - [Bloc](./bloc)
+- [MobX](./mobx)
