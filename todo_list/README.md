@@ -6,6 +6,6 @@ Project for learning about Flutter state management
 
 - [setState](./set_state)
 - [Provider](./provider)
-- [GetX](./get_x)
+- [GetX](./getx)
 - [Bloc](./bloc)
 - [MobX](./mobx)
