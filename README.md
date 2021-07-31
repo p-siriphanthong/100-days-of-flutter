@@ -71,3 +71,7 @@ Learn about state management
 **Day 11**
 
 - Manage state of todo list by Bloc
+
+**Day 12**
+
+- Manage state of todo list by MobX

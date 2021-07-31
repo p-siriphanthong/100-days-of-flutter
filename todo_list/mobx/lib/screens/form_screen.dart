@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:todo_list/models/todo.dart';
+import 'package:todo_list/stores/todo_list_store.dart';
 
 class FormScreenArguments {
   final Todo? todo;
@@ -10,15 +12,8 @@ class FormScreenArguments {
 
 class FormScreen extends StatefulWidget {
   final String? id;
-  final void Function(String text) createTodo;
-  final void Function(int id, {String text}) updateTodo;
 
-  const FormScreen({
-    Key? key,
-    this.id,
-    required this.createTodo,
-    required this.updateTodo,
-  }) : super(key: key);
+  const FormScreen({Key? key, this.id}) : super(key: key);
 
   @override
   _FormScreenState createState() => _FormScreenState();
@@ -32,6 +27,7 @@ class _FormScreenState extends State<FormScreen> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as FormScreenArguments;
+    final TodoListStore _todoListStore = Provider.of<TodoListStore>(context);
     Todo? todo = args.todo;
     bool _isEditing = todo != null;
 
@@ -65,9 +61,9 @@ class _FormScreenState extends State<FormScreen> {
                   });
 
                   if (_isEditing) {
-                    widget.updateTodo(todo.id, text: value!);
+                    _todoListStore.updateItem(todo.id, text: value!);
                   } else {
-                    widget.createTodo(value!);
+                    _todoListStore.createItem(value!);
                   }
 
                   Navigator.pop(context);
