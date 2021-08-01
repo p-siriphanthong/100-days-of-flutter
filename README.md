@@ -55,6 +55,8 @@ Learn about the basics of Flutter
 
 Learn about state management
 
+![](./demo/todo_list.gif)
+
 **Day 8**
 
 - Create todo list UI

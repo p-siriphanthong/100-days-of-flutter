@@ -2,6 +2,8 @@
 
 Project for learning about Flutter state management
 
+![](../demo/todo_list.gif)
+
 ### List of State Management
 
 - [setState](./set_state)
