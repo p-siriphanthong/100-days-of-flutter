@@ -75,3 +75,7 @@ Learn about state management
 **Day 12**
 
 - Manage state of todo list by MobX
+
+**Day 13**
+
+- Manage state of todo list by Redux
