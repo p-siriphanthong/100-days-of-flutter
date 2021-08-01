@@ -81,3 +81,11 @@ Learn about state management
 **Day 13**
 
 - Manage state of todo list by Redux
+
+### [FlutterFire Auth](./flutterfire_auth)
+
+Firebase authentication on Flutter
+
+**Day 14**
+
+- Create home, sign in, and sign up screens
