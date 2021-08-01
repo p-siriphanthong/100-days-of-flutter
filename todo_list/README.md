@@ -9,3 +9,4 @@ Project for learning about Flutter state management
 - [GetX](./getx)
 - [Bloc](./bloc)
 - [MobX](./mobx)
+- [Redux](./redux)
