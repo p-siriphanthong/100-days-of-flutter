@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/input.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormBuilderState>();
+  bool _isSubmitting = false;
+  bool _isShowError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +24,10 @@ class SignUpScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
+            FormBuilder(
+              key: _formKey,
+              autovalidateMode:
+                  _isShowError ? AutovalidateMode.onUserInteraction : null,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -23,13 +36,61 @@ class SignUpScreen extends StatelessWidget {
                     style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 32),
-                  Input(labelText: 'Email'),
+                  Input(
+                    name: 'email',
+                    labelText: 'Email',
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.email(context),
+                    ]),
+                  ),
                   SizedBox(height: 16),
-                  Input(labelText: 'Password', isPassword: true),
+                  Input(
+                    name: 'password',
+                    labelText: 'Password',
+                    isPassword: true,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.minLength(context, 8),
+                    ]),
+                  ),
                   SizedBox(height: 16),
-                  Input(labelText: 'Confirm Password', isPassword: true),
+                  Input(
+                    name: 'password_confirmation',
+                    labelText: 'Confirm Password',
+                    isPassword: true,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      (String? value) {
+                        String? password =
+                            _formKey.currentState!.fields['password']?.value;
+
+                        if (value != password)
+                          return 'The password confirmation does not match.';
+                        return null;
+                      },
+                    ]),
+                  ),
                   SizedBox(height: 32),
-                  Button(text: 'Sign Up', onPressed: () => {}),
+                  Button(
+                    text: 'Sign Up',
+                    onPressed: _isSubmitting
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.saveAndValidate()) {
+                              setState(() {
+                                _isSubmitting = true;
+                              });
+
+                              // TODO: binding
+                              print('Sign Up: ${_formKey.currentState!.value}');
+                            } else {
+                              setState(() {
+                                _isShowError = true;
+                              });
+                            }
+                          },
+                  ),
                 ],
               ),
             ),

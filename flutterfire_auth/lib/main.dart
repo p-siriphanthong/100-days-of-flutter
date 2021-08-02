@@ -8,7 +8,8 @@ import 'package:flutterfire_auth/screens/sign_up_screen.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
 
   runApp(FlutterFireAuth());
 }
