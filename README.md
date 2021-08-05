@@ -101,3 +101,4 @@ Firebase authentication on Flutter
 **Day 17**
 
 - Initialize the FlutterFire in the iOS app (continue)
+- Initialize the FlutterFire in the Android app

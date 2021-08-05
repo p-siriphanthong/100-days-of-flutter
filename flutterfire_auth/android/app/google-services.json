@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "889360110512",
+    "project_id": "flutterfire-auth-fc560",
+    "storage_bucket": "flutterfire-auth-fc560.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889360110512:android:1bb3c49f215a299ccdfc75",
+        "android_client_info": {
+          "package_name": "com.example.flutterfire_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889360110512-vae4hm58v455eeqvtm820ckn4g5d9hm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqKTQXEsFfBtp6nB1s44pMA37sPal8zok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889360110512-vae4hm58v455eeqvtm820ckn4g5d9hm7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "889360110512-83sgn7kvbdj1dr7nf8ndgo8tvj0eet8h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "p-siriphanthong.100-days-of-flutter.flutterfire-auth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
