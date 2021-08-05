@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutterfire_auth/screens/home_screen.dart';
 import 'package:flutterfire_auth/screens/sign_in_screen.dart';
 import 'package:flutterfire_auth/screens/sign_up_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
+
+  await Firebase.initializeApp();
 
   runApp(FlutterFireAuth());
 }

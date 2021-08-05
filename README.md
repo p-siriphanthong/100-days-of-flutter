@@ -93,3 +93,11 @@ Firebase authentication on Flutter
 **Day 15**
 
 - Using `flutter_form_builder` package for manage and validate sign in and sign up forms
+
+**Day 16**
+
+- Initialize the FlutterFire in the iOS app
+
+**Day 17**
+
+- Initialize the FlutterFire in the iOS app (continue)
