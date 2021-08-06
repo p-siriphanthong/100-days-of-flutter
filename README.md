@@ -102,3 +102,7 @@ Firebase authentication on Flutter
 
 - Initialize the FlutterFire in the iOS app (continue)
 - Initialize the FlutterFire in the Android app
+
+**Day 18**
+
+- Upgrade `firebase_core` version to 1.4.0
