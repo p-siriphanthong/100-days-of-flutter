@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/input.dart';
+import 'package:flutterfire_auth/services/authentication_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -15,6 +16,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isSubmitting = false;
   bool _isShowError = false;
+
+  void onSignUp() {
+    if (_formKey.currentState!.saveAndValidate()) {
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      String email = _formKey.currentState!.value['email'];
+      String password = _formKey.currentState!.value['password'];
+
+      signUpWithEmailAndPassword(
+        email: email,
+        password: password,
+      ).then((value) {
+        Navigator.pushReplacementNamed(context, 'sign_in');
+
+        // TODO: display success message
+        print('User: ${value.user!.uid}');
+      }).catchError((err) {
+        // TODO: handle error
+        print('Error: $err');
+
+        setState(() {
+          _isSubmitting = false;
+        });
+      });
+    } else {
+      setState(() {
+        _isShowError = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,22 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(height: 32),
                   Button(
                     text: 'Sign Up',
-                    onPressed: _isSubmitting
-                        ? null
-                        : () {
-                            if (_formKey.currentState!.saveAndValidate()) {
-                              setState(() {
-                                _isSubmitting = true;
-                              });
-
-                              // TODO: binding
-                              print('Sign Up: ${_formKey.currentState!.value}');
-                            } else {
-                              setState(() {
-                                _isShowError = true;
-                              });
-                            }
-                          },
+                    onPressed: _isSubmitting ? null : onSignUp,
                   ),
                 ],
               ),
