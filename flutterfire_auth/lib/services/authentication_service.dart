@@ -8,3 +8,10 @@ Future<UserCredential> signUpWithEmailAndPassword({
 }) {
   return _auth.createUserWithEmailAndPassword(email: email, password: password);
 }
+
+Future<UserCredential> signInWithEmailAndPassword({
+  required String email,
+  required String password,
+}) {
+  return _auth.signInWithEmailAndPassword(email: email, password: password);
+}

@@ -107,3 +107,4 @@ Firebase authentication on Flutter
 
 - Upgrade `firebase_core` version to 1.4.0
 - Sign-up with email and password
+- Sign-in with email and password

@@ -5,6 +5,7 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:flutterfire_auth/widgets/input.dart';
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/social_button.dart';
+import 'package:flutterfire_auth/services/authentication_service.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -17,6 +18,37 @@ class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isSubmitting = false;
   bool _isShowError = false;
+
+  void onSignIn() {
+    if (_formKey.currentState!.saveAndValidate()) {
+      setState(() {
+        _isSubmitting = true;
+      });
+
+      String email = _formKey.currentState!.value['email'];
+      String password = _formKey.currentState!.value['password'];
+
+      signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      ).then((value) {
+        Navigator.pushReplacementNamed(context, 'home');
+
+        // TODO: listening user's login status
+      }).catchError((err) {
+        // TODO: handle error
+        print('Error: $err');
+
+        setState(() {
+          _isSubmitting = false;
+        });
+      });
+    } else {
+      setState(() {
+        _isShowError = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,22 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   SizedBox(height: 32),
                   Button(
                     text: 'Sign In',
-                    onPressed: _isSubmitting
-                        ? null
-                        : () {
-                            if (_formKey.currentState!.saveAndValidate()) {
-                              setState(() {
-                                _isSubmitting = true;
-                              });
-
-                              // TODO: binding
-                              print('Sign In: ${_formKey.currentState!.value}');
-                            } else {
-                              setState(() {
-                                _isShowError = true;
-                              });
-                            }
-                          },
+                    onPressed: _isSubmitting ? null : onSignIn,
                   ),
                   SizedBox(height: 32),
                   Row(
