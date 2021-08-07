@@ -3,6 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/input.dart';
+import 'package:flutterfire_auth/widgets/unauthentication_guard.dart';
 import 'package:flutterfire_auth/services/authentication_service.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -29,12 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       signUpWithEmailAndPassword(
         email: email,
         password: password,
-      ).then((value) {
-        Navigator.pushReplacementNamed(context, 'sign_in');
-
-        // TODO: display success message
-        print('User: ${value.user!.uid}');
-      }).catchError((err) {
+      ).catchError((err) {
         // TODO: handle error
         print('Error: $err');
 
@@ -51,81 +47,89 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        minimum: EdgeInsets.only(left: 24, right: 24, top: 100, bottom: 40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            FormBuilder(
-              key: _formKey,
-              autovalidateMode:
-                  _isShowError ? AutovalidateMode.onUserInteraction : null,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    'Sign Up',
-                    style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 32),
-                  Input(
-                    name: 'email',
-                    labelText: 'Email',
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.email(context),
-                    ]),
-                  ),
-                  SizedBox(height: 16),
-                  Input(
-                    name: 'password',
-                    labelText: 'Password',
-                    isPassword: true,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      FormBuilderValidators.minLength(context, 8),
-                    ]),
-                  ),
-                  SizedBox(height: 16),
-                  Input(
-                    name: 'password_confirmation',
-                    labelText: 'Confirm Password',
-                    isPassword: true,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(context),
-                      (String? value) {
-                        String? password =
-                            _formKey.currentState!.fields['password']?.value;
+    return UnauthenticationGuard(
+      child: Scaffold(
+        body: SafeArea(
+          minimum: EdgeInsets.only(left: 24, right: 24, top: 100, bottom: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              FormBuilder(
+                key: _formKey,
+                autovalidateMode:
+                    _isShowError ? AutovalidateMode.onUserInteraction : null,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    Input(
+                      name: 'email',
+                      labelText: 'Email',
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(context),
+                        FormBuilderValidators.email(context),
+                      ]),
+                    ),
+                    SizedBox(height: 16),
+                    Input(
+                      name: 'password',
+                      labelText: 'Password',
+                      isPassword: true,
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(context),
+                        FormBuilderValidators.minLength(context, 8),
+                      ]),
+                    ),
+                    SizedBox(height: 16),
+                    Input(
+                      name: 'password_confirmation',
+                      labelText: 'Confirm Password',
+                      isPassword: true,
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(context),
+                        (String? value) {
+                          String? password =
+                              _formKey.currentState!.fields['password']?.value;
 
-                        if (value != password)
-                          return 'The password confirmation does not match.';
-                        return null;
-                      },
-                    ]),
-                  ),
-                  SizedBox(height: 32),
-                  Button(
-                    text: 'Sign Up',
-                    onPressed: _isSubmitting ? null : onSignUp,
-                  ),
-                ],
+                          if (value != password)
+                            return 'The password confirmation does not match.';
+                          return null;
+                        },
+                      ]),
+                    ),
+                    SizedBox(height: 32),
+                    Button(
+                      text: 'Sign Up',
+                      onPressed: _isSubmitting ? null : onSignUp,
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("Already have an account?"),
-                SizedBox(width: 8),
-                GestureDetector(
-                  child: Text('Sign in', style: TextStyle(color: Colors.blue)),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, 'sign_in');
-                  },
-                )
-              ],
-            )
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Already have an account?"),
+                  SizedBox(width: 8),
+                  GestureDetector(
+                    child: Text(
+                      'Sign in',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, 'sign_in');
+                    },
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
