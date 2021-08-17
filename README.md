@@ -96,11 +96,11 @@ Firebase authentication on Flutter
 
 **Day 16**
 
-- Initialize the FlutterFire in the iOS app
+- Initialize the FlutterFire in the iOS app (in progress)
 
 **Day 17**
 
-- Initialize the FlutterFire in the iOS app (continue)
+- Initialize the FlutterFire in the iOS app
 - Initialize the FlutterFire in the Android app
 
 **Day 18**
@@ -114,3 +114,15 @@ Firebase authentication on Flutter
 - Handle sign-out
 - Listen authentication state changes
 - Create `AuthenticationGuard` and `UnauthenticationGuard`
+
+**Day 20**
+
+- Replace `Provider` with `GetX` (in progress)
+
+**Day 21**
+
+- Replace `Provider` with `GetX` (in progress)
+
+**Day 22**
+
+- Replace `Provider` with `GetX`
