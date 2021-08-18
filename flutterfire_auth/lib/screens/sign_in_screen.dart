@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:get/get.dart';
 
 import 'package:flutterfire_auth/widgets/input.dart';
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/social_button.dart';
 import 'package:flutterfire_auth/widgets/unauthentication_guard.dart';
 import 'package:flutterfire_auth/services/authentication_service.dart';
+import 'package:flutterfire_auth/controllers/error_controller.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final ErrorController error = Get.put(ErrorController());
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isSubmitting = false;
   bool _isShowError = false;
@@ -33,9 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
         email: email,
         password: password,
       ).catchError((err) {
-        // TODO: handle error
-        print('Error: $err');
-
+        error.onErrorCode(err?.code);
         setState(() {
           _isSubmitting = false;
         });

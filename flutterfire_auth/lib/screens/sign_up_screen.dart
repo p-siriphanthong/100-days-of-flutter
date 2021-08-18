@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:get/get.dart';
 
 import 'package:flutterfire_auth/widgets/button.dart';
 import 'package:flutterfire_auth/widgets/input.dart';
 import 'package:flutterfire_auth/widgets/unauthentication_guard.dart';
 import 'package:flutterfire_auth/services/authentication_service.dart';
+import 'package:flutterfire_auth/controllers/error_controller.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final ErrorController error = Get.put(ErrorController());
   final _formKey = GlobalKey<FormBuilderState>();
   bool _isSubmitting = false;
   bool _isShowError = false;
@@ -31,9 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         email: email,
         password: password,
       ).catchError((err) {
-        // TODO: handle error
-        print('Error: $err');
-
+        error.onErrorCode(err?.code);
         setState(() {
           _isSubmitting = false;
         });

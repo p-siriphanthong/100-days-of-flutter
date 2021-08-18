@@ -126,3 +126,7 @@ Firebase authentication on Flutter
 **Day 22**
 
 - Replace `Provider` with `GetX`
+
+**Day 23**
+
+- Create error handler
