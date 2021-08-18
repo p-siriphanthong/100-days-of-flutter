@@ -50,86 +50,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     return UnauthenticationGuard(
       child: Scaffold(
-        body: SafeArea(
-          minimum: EdgeInsets.only(left: 24, right: 24, top: 100, bottom: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                autovalidateMode:
-                    _isShowError ? AutovalidateMode.onUserInteraction : null,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Sign Up',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(top: 100, left: 24, right: 24, bottom: 50),
+            child: FormBuilder(
+              key: _formKey,
+              autovalidateMode:
+                  _isShowError ? AutovalidateMode.onUserInteraction : null,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 32),
-                    Input(
-                      name: 'email',
-                      labelText: 'Email',
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                      ]),
-                    ),
-                    SizedBox(height: 16),
-                    Input(
-                      name: 'password',
-                      labelText: 'Password',
-                      isPassword: true,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.minLength(context, 8),
-                      ]),
-                    ),
-                    SizedBox(height: 16),
-                    Input(
-                      name: 'password_confirmation',
-                      labelText: 'Confirm Password',
-                      isPassword: true,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        (String? value) {
-                          String? password =
-                              _formKey.currentState!.fields['password']?.value;
+                  ),
+                  SizedBox(height: 32),
+                  Input(
+                    name: 'email',
+                    labelText: 'Email',
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.email(context),
+                    ]),
+                  ),
+                  SizedBox(height: 16),
+                  Input(
+                    name: 'password',
+                    labelText: 'Password',
+                    isPassword: true,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.minLength(context, 8),
+                    ]),
+                  ),
+                  SizedBox(height: 16),
+                  Input(
+                    name: 'password_confirmation',
+                    labelText: 'Confirm Password',
+                    isPassword: true,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      (String? value) {
+                        String? password =
+                            _formKey.currentState!.fields['password']?.value;
 
-                          if (value != password)
-                            return 'The password confirmation does not match.';
-                          return null;
+                        if (value != password)
+                          return 'The password confirmation does not match.';
+                        return null;
+                      },
+                    ]),
+                  ),
+                  SizedBox(height: 32),
+                  Button(
+                    text: 'Sign Up',
+                    onPressed: _isSubmitting ? null : onSignUp,
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Already have an account?"),
+                      SizedBox(width: 8),
+                      GestureDetector(
+                        child: Text(
+                          'Sign in',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, 'sign_in');
                         },
-                      ]),
-                    ),
-                    SizedBox(height: 32),
-                    Button(
-                      text: 'Sign Up',
-                      onPressed: _isSubmitting ? null : onSignUp,
-                    ),
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have an account?"),
-                  SizedBox(width: 8),
-                  GestureDetector(
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, 'sign_in');
-                    },
+                      )
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),

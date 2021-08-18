@@ -52,96 +52,98 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return UnauthenticationGuard(
       child: Scaffold(
-        body: SafeArea(
-          minimum: EdgeInsets.only(left: 24, right: 24, top: 100, bottom: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FormBuilder(
-                key: _formKey,
-                autovalidateMode:
-                    _isShowError ? AutovalidateMode.onUserInteraction : null,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'Sign In',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(top: 100, left: 24, right: 24, bottom: 50),
+            child: FormBuilder(
+              key: _formKey,
+              autovalidateMode:
+                  _isShowError ? AutovalidateMode.onUserInteraction : null,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Sign In',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  Input(
+                    name: 'email',
+                    labelText: 'Email',
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                      FormBuilderValidators.email(context),
+                    ]),
+                  ),
+                  SizedBox(height: 16),
+                  Input(
+                    name: 'password',
+                    labelText: 'Password',
+                    isPassword: true,
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(context),
+                    ]),
+                  ),
+                  SizedBox(height: 32),
+                  Button(
+                    text: 'Sign In',
+                    onPressed: _isSubmitting ? null : onSignIn,
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Don't have an account?"),
+                      SizedBox(width: 8),
+                      GestureDetector(
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () {
+                          Navigator.pushReplacementNamed(context, 'sign_up');
+                        },
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(color: Colors.grey),
                       ),
-                    ),
-                    SizedBox(height: 32),
-                    Input(
-                      name: 'email',
-                      labelText: 'Email',
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                        FormBuilderValidators.email(context),
-                      ]),
-                    ),
-                    SizedBox(height: 16),
-                    Input(
-                      name: 'password',
-                      labelText: 'Password',
-                      isPassword: true,
-                      validator: FormBuilderValidators.compose([
-                        FormBuilderValidators.required(context),
-                      ]),
-                    ),
-                    SizedBox(height: 32),
-                    Button(
-                      text: 'Sign In',
-                      onPressed: _isSubmitting ? null : onSignIn,
-                    ),
-                    SizedBox(height: 32),
-                    Row(
-                      children: [
-                        Expanded(child: Divider()),
-                        SizedBox(width: 8),
-                        Text('or'),
-                        SizedBox(width: 8),
-                        Expanded(child: Divider()),
-                      ],
-                    ),
-                    SizedBox(height: 32),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SocialButton(
-                          button: Buttons.Facebook,
-                          onPressed: () => {},
-                        ),
-                        SocialButton(
-                          button: Buttons.Twitter,
-                          onPressed: () => {},
-                        ),
-                        SocialButton(
-                          button: Buttons.Email,
-                          onPressed: () => {},
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Don't have an account?"),
-                  SizedBox(width: 8),
-                  GestureDetector(
-                    child: Text(
-                      'Sign up',
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onTap: () {
-                      Navigator.pushReplacementNamed(context, 'sign_up');
-                    },
+                      SizedBox(width: 8),
+                      Text('or'),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Divider(color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 32),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SocialButton(
+                        button: Buttons.Facebook,
+                        onPressed: () => {},
+                      ),
+                      SocialButton(
+                        button: Buttons.Twitter,
+                        onPressed: () => {},
+                      ),
+                      SocialButton(
+                        button: Buttons.Email,
+                        onPressed: () => {},
+                      ),
+                    ],
                   )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),

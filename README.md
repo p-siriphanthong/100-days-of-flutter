@@ -130,3 +130,4 @@ Firebase authentication on Flutter
 **Day 23**
 
 - Create error handler
+- Fix widget overflowed on sign-up and sign-in screens
