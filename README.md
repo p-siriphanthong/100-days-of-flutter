@@ -131,3 +131,7 @@ Firebase authentication on Flutter
 
 - Create error handler
 - Fix widget overflowed on sign-up and sign-in screens
+
+**Day 24**
+
+- Force a reload user on starting the app (support disable or delete the user via the Firebase console)

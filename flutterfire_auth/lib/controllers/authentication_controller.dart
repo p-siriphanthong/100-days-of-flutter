@@ -18,5 +18,7 @@ class AuthenticationController extends GetxController {
       _user.value = user;
       _isAuthenticated.value = user != null;
     });
+
+    _user.value?.reload();
   }
 }
