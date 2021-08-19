@@ -135,3 +135,4 @@ Firebase authentication on Flutter
 **Day 24**
 
 - Force a reload user on starting the app (support disable or delete the user via the Firebase console)
+- Sign-in with Google in the iOS app

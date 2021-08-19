@@ -136,8 +136,14 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () => {},
                       ),
                       SocialButton(
+                        // TODO: using to Buttons.Google
+                        // Note: waiting for MR https://github.com/ZaynJarvis/Flutter-Sign-in-Button/pull/82
                         button: Buttons.Email,
-                        onPressed: () => {},
+                        onPressed: () {
+                          signInWithGoogle().catchError((err) {
+                            error.onErrorCode(err?.code);
+                          });
+                        },
                       ),
                     ],
                   )
