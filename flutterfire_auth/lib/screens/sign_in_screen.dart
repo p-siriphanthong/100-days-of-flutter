@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:sign_button/sign_button.dart';
 import 'package:get/get.dart';
 
 import 'package:flutterfire_auth/widgets/input.dart';
@@ -128,22 +128,20 @@ class _SignInScreenState extends State<SignInScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       SocialButton(
-                        button: Buttons.Facebook,
-                        onPressed: () => {},
-                      ),
-                      SocialButton(
-                        button: Buttons.Twitter,
-                        onPressed: () => {},
-                      ),
-                      SocialButton(
-                        // TODO: using to Buttons.Google
-                        // Note: waiting for MR https://github.com/ZaynJarvis/Flutter-Sign-in-Button/pull/82
-                        button: Buttons.Email,
+                        button: ButtonType.google,
                         onPressed: () {
                           signInWithGoogle().catchError((err) {
                             error.onErrorCode(err?.code);
                           });
                         },
+                      ),
+                      SocialButton(
+                        button: ButtonType.facebook,
+                        onPressed: () => {},
+                      ),
+                      SocialButton(
+                        button: ButtonType.twitter,
+                        onPressed: () => {},
                       ),
                     ],
                   )

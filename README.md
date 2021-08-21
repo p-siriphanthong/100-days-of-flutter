@@ -140,3 +140,4 @@ Firebase authentication on Flutter
 **Day 25**
 
 - Sign-in with Google in the Android app
+- Replace `flutter_signin_button` with `sign_button` package

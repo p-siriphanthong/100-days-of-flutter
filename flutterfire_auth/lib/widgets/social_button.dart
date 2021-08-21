@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:sign_button/sign_button.dart';
 
 class SocialButton extends StatelessWidget {
-  final Buttons button;
+  final ButtonType button;
   final void Function() onPressed;
 
   const SocialButton({
@@ -13,13 +13,8 @@ class SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SignInButton(
-      button,
-      mini: true,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return SignInButton.mini(
+      buttonType: button,
       onPressed: onPressed,
     );
   }
