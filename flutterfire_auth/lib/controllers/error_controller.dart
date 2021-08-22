@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 const ERROR_MESSAGE = {
   'email-already-in-use': 'This email address is already being used.',
   'user-not-found': 'The email address or password is incorrect.',
+  'wrong-password': 'The email address or password is incorrect.',
   'user-disabled': 'This account has been disabled.',
 };
 
