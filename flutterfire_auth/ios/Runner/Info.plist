@@ -42,7 +42,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
-	<!-- Google Sign-In section -->
+	<!-- Authentication section -->
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -50,11 +50,20 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<!-- Same as the REVERSED_CLIENT_ID key in GoogleService-Info.plist -->
+				<!-- For Google Sign-In: same as the REVERSED_CLIENT_ID key in GoogleService-Info.plist -->
 				<string>com.googleusercontent.apps.889360110512-dcgpc1k11tn637jp3gst35bk5ievpj7a</string>
+				<!-- For Facebook Login -->
+				<string>fb241851657940436</string>
 			</array>
 		</dict>
 	</array>
-	<!-- End of the Google Sign-In section -->
+	<key>FacebookAppID</key>
+	<string>241851657940436</string>
+	<key>FacebookClientToken</key>
+	<string>7c070660526fb2cf4865ac0344824e0a</string>
+	<key>FacebookDisplayName</key>
+	<string>FlutterFire Auth</string>
+	<!-- End of the Authentication section -->
+
 </dict>
 </plist>

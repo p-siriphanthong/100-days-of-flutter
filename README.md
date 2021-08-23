@@ -144,4 +144,4 @@ Firebase authentication on Flutter
 
 **Day 26**
 
-- Sign-in with Facebook in the Android app
+- Sign-in with Facebook
