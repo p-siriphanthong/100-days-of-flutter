@@ -145,7 +145,11 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       SocialButton(
                         button: ButtonType.twitter,
-                        onPressed: () => {},
+                        onPressed: () {
+                          signInWithTwitter().catchError((err) {
+                            error.onErrorCode(err?.code);
+                          });
+                        },
                       ),
                     ],
                   )

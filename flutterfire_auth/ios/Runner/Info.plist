@@ -54,6 +54,8 @@
 				<string>com.googleusercontent.apps.889360110512-dcgpc1k11tn637jp3gst35bk5ievpj7a</string>
 				<!-- For Facebook Login -->
 				<string>fb241851657940436</string>
+				<!-- For Twitter Authentication -->
+				<string>flutterfire-auth</string>
 			</array>
 		</dict>
 	</array>
