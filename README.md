@@ -149,3 +149,7 @@ Firebase authentication on Flutter
 **Day 27**
 
 - Sign-in with Twitter in the iOS app
+
+**Day 28**
+
+- Sign-in with Twitter in the Android app

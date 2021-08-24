@@ -31,9 +31,18 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <!-- Twitter Authentication section -->
+            <intent-filter>
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="flutterfire-auth" />
+            </intent-filter>
+            <!-- End of the Twitter Authentication section -->
         </activity>
 
-        <!-- For Facebook Login -->
+        <!-- Facebook Login section -->
         <meta-data
           android:name="com.facebook.sdk.ApplicationId" 
           android:value="@string/facebook_app_id"
@@ -53,6 +62,7 @@
             <data android:scheme="@string/fb_login_protocol_scheme" />
           </intent-filter>
         </activity>
+        <!-- End of the Facebook Login section -->
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
