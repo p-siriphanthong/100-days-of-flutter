@@ -4,13 +4,14 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:twitter_login/twitter_login.dart';
 import 'package:twitter_login/entity/auth_result.dart';
 
+import 'package:flutterfire_auth/config.dart';
+
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _google = GoogleSignIn();
 final FacebookAuth _facebook = FacebookAuth.instance;
 final TwitterLogin _twitter = TwitterLogin(
-  // TODO: get api-key and api-secret-key from environment variables
-  apiKey: "<api-key>",
-  apiSecretKey: "<api-secret-key>",
+  apiKey: twitterApiKey,
+  apiSecretKey: twitterApiSecretKey,
   redirectURI: 'flutterfire-auth://',
 );
 
