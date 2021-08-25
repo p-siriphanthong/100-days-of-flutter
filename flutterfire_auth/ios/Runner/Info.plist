@@ -53,18 +53,18 @@
 				<!-- For Google Sign-In: same as the REVERSED_CLIENT_ID key in GoogleService-Info.plist -->
 				<string>com.googleusercontent.apps.889360110512-dcgpc1k11tn637jp3gst35bk5ievpj7a</string>
 				<!-- For Facebook Login -->
-				<string>fb241851657940436</string>
+				<string>fb$(FACEBOOK_APP_ID)</string>
 				<!-- For Twitter Authentication -->
-				<string>flutterfire-auth</string>
+				<string>$(TWITTER_APP_NAME)</string>
 			</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>241851657940436</string>
+	<string>$(FACEBOOK_APP_ID)</string>
 	<key>FacebookClientToken</key>
-	<string>7c070660526fb2cf4865ac0344824e0a</string>
+	<string>$(FACEBOOK_CLIENT_TOKEN)</string>
 	<key>FacebookDisplayName</key>
-	<string>FlutterFire Auth</string>
+	<string>$(FACEBOOK_APP_NAME)</string>
 	<!-- End of the Authentication section -->
 
 </dict>

@@ -37,7 +37,7 @@
               <action android:name="android.intent.action.VIEW" />
               <category android:name="android.intent.category.DEFAULT" />
               <category android:name="android.intent.category.BROWSABLE" />
-              <data android:scheme="flutterfire-auth" />
+              <data android:scheme="@string/TWITTER_APP_NAME" />
             </intent-filter>
             <!-- End of the Twitter Authentication section -->
         </activity>
@@ -45,12 +45,12 @@
         <!-- Facebook Login section -->
         <meta-data
           android:name="com.facebook.sdk.ApplicationId" 
-          android:value="@string/facebook_app_id"
+          android:value="@string/FACEBOOK_APP_ID"
           />
         <activity
           android:name="com.facebook.FacebookActivity"
           android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-          android:label="@string/app_name"
+          android:label="@string/FACEBOOK_APP_NAME"
           />
         <activity
           android:name="com.facebook.CustomTabActivity"
@@ -59,7 +59,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/fb_login_protocol_scheme" />
+            <data android:scheme="fb@string/FACEBOOK_APP_ID" />
           </intent-filter>
         </activity>
         <!-- End of the Facebook Login section -->

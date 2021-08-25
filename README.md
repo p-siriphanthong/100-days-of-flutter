@@ -154,3 +154,7 @@ Firebase authentication on Flutter
 
 - Sign-in with Twitter in the Android app
 - Read environment variables from `.env` file by using `flutter_config` package
+
+**Day 29**
+
+- Using environment variables from `.env` file in native files by using `flutter_config` package

@@ -12,7 +12,7 @@ final FacebookAuth _facebook = FacebookAuth.instance;
 final TwitterLogin _twitter = TwitterLogin(
   apiKey: twitterApiKey,
   apiSecretKey: twitterApiSecretKey,
-  redirectURI: 'flutterfire-auth://',
+  redirectURI: '$twitterAppName://',
 );
 
 FirebaseAuth getFirebaseAuth() {
