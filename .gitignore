@@ -9,6 +9,8 @@
 .buildlog/
 .history
 .svn/
+.gitsecret/keys/random_seed
+!*.secret
 
 # IntelliJ related
 *.iml

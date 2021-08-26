@@ -158,3 +158,7 @@ Firebase authentication on Flutter
 **Day 29**
 
 - Using environment variables from `.env` file in native files by using `flutter_config` package
+
+**Day 30**
+
+- Using `git-secret` to encrypt and decrypt `.env` file
