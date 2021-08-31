@@ -162,3 +162,12 @@ Firebase authentication on Flutter
 **Day 30**
 
 - Using `git-secret` to encrypt and decrypt `.env` file
+
+**Day 31**
+
+- Sign-in with Apple in the iOS app (in progress)
+
+**Day 32**
+
+- Try to build the app on physical iOS device
+- Remove sign-in with Apple because the "Personal Team" account doesn't allow to use it
