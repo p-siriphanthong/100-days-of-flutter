@@ -171,3 +171,8 @@ Firebase authentication on Flutter
 
 - Try to build the app on physical iOS device
 - Remove sign-in with Apple because the "Personal Team" account doesn't allow to use it
+
+**Day 33**
+
+- Create assets directory
+- Remove `sign_button` package and use images from assets directory instead

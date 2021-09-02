@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:sign_button/sign_button.dart';
 import 'package:get/get.dart';
 
 import 'package:flutterfire_auth/widgets/input.dart';
@@ -125,10 +124,10 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   SizedBox(height: 32),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       SocialButton(
-                        button: ButtonType.google,
+                        button: SocialBrand.google,
                         onPressed: () {
                           signInWithGoogle().catchError((err) {
                             error.onErrorCode(err?.code);
@@ -136,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                       SocialButton(
-                        button: ButtonType.facebook,
+                        button: SocialBrand.facebook,
                         onPressed: () {
                           signInWithFacebook().catchError((err) {
                             error.onErrorCode(err?.code);
@@ -144,7 +143,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         },
                       ),
                       SocialButton(
-                        button: ButtonType.twitter,
+                        button: SocialBrand.twitter,
                         onPressed: () {
                           signInWithTwitter().catchError((err) {
                             error.onErrorCode(err?.code);

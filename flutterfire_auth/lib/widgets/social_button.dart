@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:sign_button/sign_button.dart';
+
+enum SocialBrand { google, facebook, twitter, line }
+
+const SocialBrandImage = {
+  SocialBrand.google: 'assets/images/google.png',
+  SocialBrand.facebook: 'assets/images/facebook.png',
+  SocialBrand.twitter: 'assets/images/twitter.png',
+  SocialBrand.line: 'assets/images/line.png',
+};
 
 class SocialButton extends StatelessWidget {
-  final ButtonType button;
+  final SocialBrand button;
   final void Function() onPressed;
 
   const SocialButton({
@@ -13,9 +21,23 @@ class SocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SignInButton.mini(
-      buttonType: button,
-      onPressed: onPressed,
+    return Container(
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Image(
+          image: AssetImage(SocialBrandImage[button]!),
+          height: 40,
+        ),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 5,
+          ),
+        ],
+      ),
     );
   }
 }
