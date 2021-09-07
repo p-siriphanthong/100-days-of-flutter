@@ -86,6 +86,8 @@ Learn about state management
 
 Firebase authentication on Flutter
 
+![](./demo/flutterfire_auth.gif)
+
 **Day 14**
 
 - Create home, sign in, and sign up screens
@@ -176,3 +178,8 @@ Firebase authentication on Flutter
 
 - Create assets directory
 - Remove `sign_button` package and use images from assets directory instead
+- Sign-in with LINE (in progress)
+
+**Day 34**
+
+- Remove sign-in with LINE
