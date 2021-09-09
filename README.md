@@ -183,3 +183,15 @@ Firebase authentication on Flutter
 **Day 34**
 
 - Remove sign-in with LINE
+
+### [Mastermind](./mastermind)
+
+Color code breaking game
+
+**Day 35**
+
+- Feature ideation
+
+**Day 36**
+
+- Create routes for home screen and game screen
