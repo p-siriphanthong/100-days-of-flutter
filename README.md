@@ -195,3 +195,5 @@ Color code breaking game
 **Day 36**
 
 - Create routes for home screen and game screen
+- Create main layout of game screen
+- Using `Draggable` and `DragTarget` to drag and drop the code pegs
