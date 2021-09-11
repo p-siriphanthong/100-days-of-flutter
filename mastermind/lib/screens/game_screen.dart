@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mastermind/widgets/code_peg.dart';
+import 'package:mastermind/widgets/colored_peg.dart';
 
 class GameScreen extends StatelessWidget {
   const GameScreen({Key? key}) : super(key: key);
