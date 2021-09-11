@@ -197,3 +197,7 @@ Color code breaking game
 - Create routes for home screen and game screen
 - Create main layout of game screen
 - Using `Draggable` and `DragTarget` to drag and drop the code pegs
+
+**Day 37**
+
+- Manage state of game list by GetX
