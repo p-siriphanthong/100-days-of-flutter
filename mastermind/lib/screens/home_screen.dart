@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => Navigator.pushReplacementNamed(context, 'game'),
+          onPressed: () => Navigator.pushNamed(context, 'game'),
           child: Text('Start Game'),
         ),
       ),
