@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:mastermind/controllers/game_controller.dart';
 import 'package:mastermind/widgets/colored_peg.dart';
+import 'package:mastermind/widgets/guess_row.dart';
 
 class GameScreen extends StatelessWidget {
   final GameController c = Get.put(GameController());
@@ -20,26 +21,7 @@ class GameScreen extends StatelessWidget {
         body: Obx(
           () => ListView(
             children: List.generate(c.numberOfGuessRow, (row) {
-              return Container(
-                height: 80,
-                color: Colors.amber[row % 2 == 0 ? 600 : 100],
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(4, (position) {
-                    return DragTarget(
-                      builder: (context, candidateData, rejectedData) {
-                        return CodePag(color: Colors.grey);
-                      },
-                      onWillAccept: (data) {
-                        return row == c.currentGuessRow;
-                      },
-                      onAccept: (color) {
-                        print('position: ${position + 1}, color: $color');
-                      },
-                    );
-                  }),
-                ),
-              );
+              return GuessRow(index: row);
             }),
             reverse: true,
           ),
