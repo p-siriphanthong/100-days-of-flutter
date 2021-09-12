@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:mastermind/controllers/game_controller.dart';
-import 'package:mastermind/widgets/colored_peg.dart';
+import 'package:mastermind/widgets/peg_hole.dart';
 
 class GuessRow extends StatelessWidget {
   final GameController c = Get.put(GameController());
@@ -12,22 +12,20 @@ class GuessRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final code = c.guessedCodes[index];
+
     return Container(
       height: 80,
       color: Colors.amber[index % 2 == 0 ? 600 : 100],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: List.generate(4, (position) {
-          return DragTarget(
-            builder: (context, candidateData, rejectedData) {
-              return CodePag(color: Colors.grey);
-            },
-            onWillAccept: (color) {
-              return index == c.currentGuessRow;
-            },
-            onAccept: (color) {
-              print('position: ${position + 1}, color: $color');
-            },
+        children: List.generate(c.codeSize, (position) {
+          return Obx(
+            () => PegHole(
+              color: code[position],
+              row: index,
+              position: position,
+            ),
           );
         }),
       ),

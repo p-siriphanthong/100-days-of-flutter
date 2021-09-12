@@ -30,14 +30,14 @@ class GameScreen extends StatelessWidget {
           child: Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(5, (index) {
+              children: c.availableColors.map((color) {
                 return Draggable(
-                  data: 'red',
-                  child: CodePag(color: Colors.red),
-                  feedback: CodePag(color: Colors.red),
-                  childWhenDragging: CodePag(color: Colors.red),
+                  data: color,
+                  child: CodePag(color: color),
+                  feedback: CodePag(color: color),
+                  childWhenDragging: CodePag(),
                 );
-              }),
+              }).toList(),
             ),
             padding: EdgeInsets.symmetric(vertical: 20),
           ),

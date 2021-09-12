@@ -201,4 +201,5 @@ Color code breaking game
 **Day 37**
 
 - Manage state of game list by GetX
-- Create `GuessRow` widget
+- Create `GuessRow` and `PegHole` widgets
+- Handle drop event of `PegHole` widget

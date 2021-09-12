@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:mastermind/controllers/game_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final GameController c = Get.put(GameController());
+
+  HomeScreen({Key? key}) : super(key: key);
+
+  void startNewGame(BuildContext context) {
+    c.startNewGame();
+    Navigator.pushNamed(context, 'game');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: ElevatedButton(
-          onPressed: () => Navigator.pushNamed(context, 'game'),
+          onPressed: () => startNewGame(context),
           child: Text('Start Game'),
         ),
       ),
