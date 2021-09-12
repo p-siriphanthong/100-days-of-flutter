@@ -203,3 +203,7 @@ Color code breaking game
 - Manage state of game list by GetX
 - Create `GuessRow` and `PegHole` widgets
 - Handle drop event of `PegHole` widget
+
+**Day 38**
+
+- Focus on `PegHole` widget

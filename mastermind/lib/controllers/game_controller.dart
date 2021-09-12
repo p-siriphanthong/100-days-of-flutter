@@ -9,6 +9,7 @@ class GameController extends GetxController {
   late List<RxList<Color?>> _guessedCodes;
   late Rx<int> _numberOfGuessRow;
   late Rx<int> _currentGuessRow;
+  late Rx<int?> _focusedPosition;
 
   List<Color> get secretCode => _secretCode;
   List<Color> get availableColors => _availableColors;
@@ -16,6 +17,7 @@ class GameController extends GetxController {
   int get codeSize => _secretCode.length;
   int get numberOfGuessRow => _numberOfGuessRow.value;
   int get currentGuessRow => _currentGuessRow.value;
+  int? get focusedPosition => _focusedPosition.value;
 
   void startNewGame() {
     _availableColors = [
@@ -25,13 +27,13 @@ class GameController extends GetxController {
       Colors.yellow,
       Colors.pink
     ];
-    _guessedCodes = [];
-    _numberOfGuessRow = 10.obs;
-    _currentGuessRow = 0.obs;
+    _numberOfGuessRow = Rx<int>(10);
+    _currentGuessRow = Rx<int>(0);
+    _focusedPosition = Rx<int?>(null);
 
     _secretCode = _generateSecretCode(4);
-    _guessedCodes = List.generate(numberOfGuessRow, (_) {
-      return RxList.generate(codeSize, (_) => null);
+    _guessedCodes = List.generate(numberOfGuessRow, (row) {
+      return RxList.generate(codeSize, (position) => null);
     });
   }
 
@@ -39,14 +41,21 @@ class GameController extends GetxController {
     _numberOfGuessRow.value += value;
   }
 
-  void guess(Color color, int position) {
-    _guessedCodes[currentGuessRow][position] = color;
+  void updateFocusedPosition(int? position) {
+    _focusedPosition.value = position;
+  }
+
+  void guess(Color color) {
+    if (focusedPosition == null) return;
+
+    _guessedCodes[currentGuessRow][focusedPosition!] = color;
+    _focusedPosition.value = null;
   }
 
   List<Color> _generateSecretCode(int size) {
     return List.generate(
       size,
-      (index) => _availableColors[Random().nextInt(_availableColors.length)],
+      (index) => availableColors[Random().nextInt(availableColors.length)],
     );
   }
 }

@@ -15,16 +15,26 @@ class GuessRow extends StatelessWidget {
     final code = c.guessedCodes[index];
 
     return Container(
-      height: 80,
       color: Colors.amber[index % 2 == 0 ? 600 : 100],
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(c.codeSize, (position) {
-          return Obx(
-            () => PegHole(
-              color: code[position],
-              row: index,
-              position: position,
+          return Expanded(
+            child: DragTarget(
+              builder: (context, candidateData, rejectedData) {
+                return Container(
+                  child: Obx(
+                    () => PegHole(
+                      color: code[position],
+                      row: index,
+                      position: position,
+                    ),
+                  ),
+                  padding: EdgeInsets.all(5),
+                );
+              },
+              onMove: (data) => c.updateFocusedPosition(position),
+              onLeave: (data) => c.updateFocusedPosition(null),
+              onAccept: (Color color) => c.guess(color),
             ),
           );
         }),

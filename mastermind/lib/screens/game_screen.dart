@@ -36,6 +36,7 @@ class GameScreen extends StatelessWidget {
                   child: CodePag(color: color),
                   feedback: CodePag(color: color),
                   childWhenDragging: CodePag(),
+                  maxSimultaneousDrags: 1,
                 );
               }).toList(),
             ),

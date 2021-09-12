@@ -19,16 +19,20 @@ class PegHole extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DragTarget(
-      builder: (context, candidateData, rejectedData) {
-        return CodePag(color: color ?? Colors.grey);
-      },
-      onWillAccept: (data) {
-        return row == c.currentGuessRow;
-      },
-      onAccept: (Color color) {
-        c.guess(color, position);
-      },
+    return Obx(
+      () => Container(
+        child: CodePag(color: color ?? Colors.grey),
+        padding: EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: (c.currentGuessRow == row && c.focusedPosition == position)
+                ? Colors.red
+                : Colors.transparent,
+            width: 2,
+          ),
+        ),
+      ),
     );
   }
 }
