@@ -207,3 +207,8 @@ Color code breaking game
 **Day 38**
 
 - Focus on `PegHole` widget
+
+**Day 39**
+
+- Setup font family and icon font
+- Update UI

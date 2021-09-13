@@ -21,11 +21,12 @@ class GameController extends GetxController {
 
   void startNewGame() {
     _availableColors = [
-      Colors.red,
-      Colors.green,
-      Colors.orange,
-      Colors.yellow,
-      Colors.pink
+      Color(0xFFC74A4A),
+      Color(0xFFD67F36),
+      Color(0xFFEBC55F),
+      Color(0xFF71C97B),
+      Color(0xFF67C3CB),
+      Color(0xFF4949D3),
     ];
     _numberOfGuessRow = Rx<int>(10);
     _currentGuessRow = Rx<int>(0);

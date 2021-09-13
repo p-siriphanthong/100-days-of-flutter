@@ -24,6 +24,10 @@ class Mastermind extends StatelessWidget {
         'home': (context) => HomeScreen(),
         'game': (context) => GameScreen(),
       },
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        fontFamily: 'Lato',
+      ),
     );
   }
 }
