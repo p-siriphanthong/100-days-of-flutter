@@ -212,3 +212,7 @@ Color code breaking game
 
 - Setup font family and icon font
 - Update UI
+
+**Day 40**
+
+- Handle guess code and give feedback
